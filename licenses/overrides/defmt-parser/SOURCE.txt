@@ -1,0 +1,7 @@
+Crate: defmt-parser 1.0.0
+Commit: 4a8cdb44891ed57b8ff5a023b6bec7137c48708f (release commit, from the crate's .cargo_vcs_info.json)
+License field on crates.io: MIT OR Apache-2.0
+Fetched: 2026-09-25, re-verified byte-identical 2026-09-26
+LICENSE-MIT: https://raw.githubusercontent.com/knurling-rs/defmt/4a8cdb44891ed57b8ff5a023b6bec7137c48708f/LICENSE-MIT
+LICENSE-APACHE: https://raw.githubusercontent.com/knurling-rs/defmt/4a8cdb44891ed57b8ff5a023b6bec7137c48708f/LICENSE-APACHE
+Note: the crate lives in parser/ of the repository, which has no license files of its own; these are the repository-root files at the release commit.

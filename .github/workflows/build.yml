@@ -1,0 +1,97 @@
+# Builds WhoIsThis for Windows, macOS and Linux.
+#   - Push a tag like v0.2.0 (see `npm run bump`) -> builds and attaches the files to a draft GitHub Release
+#   - Or run it manually from the Actions tab (workflow_dispatch)
+name: build
+
+on:
+  push:
+    tags: ['v*']
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  licenses:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: dtolnay/rust-toolchain@stable
+      # Fails if a dependency uses a license outside the allowlist, or if the
+      # committed THIRD_PARTY_LICENSES.md / src/third-party-licenses.html are stale.
+      - run: npm run licenses:check
+
+  build:
+    needs: licenses
+    permissions:
+      contents: write # create the draft release and upload files to it
+    # Full builds only for tags and manual runs; pushes and PRs just run the license check.
+    if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: windows-latest
+            args: ''
+          - platform: macos-latest
+            args: '--target universal-apple-darwin'
+          - platform: ubuntu-22.04
+            args: ''
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Linux dependencies
+        if: matrix.platform == 'ubuntu-22.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
+
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: './src-tauri -> target'
+
+      - run: npm ci
+
+      - uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: ${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || '' }}
+          releaseName: 'WhoIsThis v__VERSION__'
+          releaseDraft: true
+          args: ${{ matrix.args }}
+
+      - name: Attach portable Windows exe
+        if: matrix.platform == 'windows-latest' && startsWith(github.ref, 'refs/tags/v')
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          cp src-tauri/target/release/who-is-this.exe "WhoIsThis_${VERSION}_x64_portable.exe"
+          gh release upload "${GITHUB_REF_NAME}" "WhoIsThis_${VERSION}_x64_portable.exe" --clobber
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: whoisthis-${{ matrix.platform }}
+          path: |
+            src-tauri/target/**/release/bundle/**/*.exe
+            src-tauri/target/**/release/bundle/**/*.msi
+            src-tauri/target/**/release/bundle/**/*.dmg
+            src-tauri/target/**/release/bundle/**/*.deb
+            src-tauri/target/**/release/bundle/**/*.rpm
+            src-tauri/target/release/who-is-this.exe

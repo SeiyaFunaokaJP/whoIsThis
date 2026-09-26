@@ -1,0 +1,69 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "WhoIsThis",
+  "version": "../package.json",
+  "identifier": "io.github.seiyafunaokajp.whoisthis",
+  "build": {
+    "frontendDist": "../src"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "WhoIsThis",
+        "width": 1100,
+        "height": 760,
+        "minWidth": 720,
+        "minHeight": 560,
+        "dragDropEnabled": false
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost blob: data:; connect-src ipc: http://ipc.localhost data:; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'",
+      "assetProtocol": {
+        "enable": true,
+        "scope": []
+      }
+    },
+    "withGlobalTauri": true
+  },
+  "bundle": {
+    "active": true,
+    "targets": [
+      "nsis",
+      "msi",
+      "app",
+      "dmg",
+      "deb",
+      "rpm"
+    ],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "publisher": "Seiya Funaoka",
+    "copyright": "Copyright (c) 2026 Seiya Funaoka. MIT License.",
+    "category": "Education",
+    "shortDescription": "Learn to match faces and names",
+    "longDescription": "A small offline app for learning people's names: add photos, study with flashcards, and quiz yourself.",
+    "licenseFile": "../LICENSE",
+    "license": "MIT",
+    "windows": {
+      "nsis": {
+        "languages": [
+          "English",
+          "Japanese"
+        ],
+        "displayLanguageSelector": false
+      },
+      "wix": {
+        "language": [
+          "en-US",
+          "ja-JP"
+        ]
+      }
+    }
+  }
+}

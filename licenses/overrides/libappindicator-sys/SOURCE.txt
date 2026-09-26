@@ -1,0 +1,7 @@
+Crate: libappindicator-sys 0.9.0
+Commit: eafd1e3682a1247f595410266091e9684021cb6f (release commit, from the crate's .cargo_vcs_info.json)
+License field on crates.io: Apache-2.0 OR MIT
+Fetched: 2026-09-25, re-verified byte-identical 2026-09-26
+LICENSE-MIT: https://raw.githubusercontent.com/tauri-apps/libappindicator-rs/eafd1e3682a1247f595410266091e9684021cb6f/LICENSE-MIT
+LICENSE-APACHE: https://raw.githubusercontent.com/tauri-apps/libappindicator-rs/eafd1e3682a1247f595410266091e9684021cb6f/LICENSE-APACHE
+Note: the crate lives in sys/ of the repository, which has no license files of its own; these are the repository-root files at the release commit.

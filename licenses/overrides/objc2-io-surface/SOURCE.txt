@@ -1,0 +1,9 @@
+Crate: objc2-io-surface 0.3.2
+Commit: 7b1abfd750a2cacaea71d6a56ecfb83cb7de560b (release commit, from the crate's .cargo_vcs_info.json)
+License field on crates.io: Zlib OR Apache-2.0 OR MIT
+Fetched: 2026-09-25, re-verified byte-identical 2026-09-26
+LICENSE.md: https://raw.githubusercontent.com/madsmtm/objc2/7b1abfd750a2cacaea71d6a56ecfb83cb7de560b/LICENSE.md
+LICENSE-APACHE.txt: https://raw.githubusercontent.com/madsmtm/objc2/ee9a7ada2131f5944b8750428e265c15632f2a19/LICENSE-APACHE.txt
+LICENSE-MIT.txt: https://raw.githubusercontent.com/madsmtm/objc2/ee9a7ada2131f5944b8750428e265c15632f2a19/LICENSE-MIT.txt
+LICENSE-ZLIB.txt: https://raw.githubusercontent.com/madsmtm/objc2/ee9a7ada2131f5944b8750428e265c15632f2a19/LICENSE-ZLIB.txt
+Note: at the release commit the repository only had LICENSE.md, which names the licenses without their full text. The full texts (LICENSE-*.txt) were added upstream in commit ee9a7ada2131f5944b8750428e265c15632f2a19 (2026-03-18, 'Include license text in the repository', fixes madsmtm/objc2#826) and are taken from that commit.

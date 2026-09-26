@@ -1,0 +1,5 @@
+Version: NSIS 3.11 (the version tauri-cli 2.11 downloads for Windows setup builds)
+Commit: 7359413009afd4f0fff472d841fc2f2cc0e0a5f8 (tag v311 in the GitHub mirror of NSIS)
+Fetched: 2026-09-25, re-verified byte-identical 2026-09-26
+COPYING: https://raw.githubusercontent.com/kichik/nsis/7359413009afd4f0fff472d841fc2f2cc0e0a5f8/COPYING
+Note: also byte-identical to COPYING in the NSIS copy tauri-cli installs under %LOCALAPPDATA%\tauri\NSIS.

@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WhoIsThis</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">?</span>
+      <span class="brand-name">WhoIsThis</span>
+    </div>
+    <nav class="tabs" role="tablist">
+      <button class="tab active" data-view="people" role="tab" data-i18n="tab.people"></button>
+      <button class="tab" data-view="study" role="tab" data-i18n="tab.study"></button>
+      <button class="tab" data-view="quiz" role="tab" data-i18n="tab.quiz"></button>
+    </nav>
+    <div class="top-right">
+      <label class="top-select">
+        <span data-i18n="group.label"></span>
+        <select id="groupSelect"></select>
+      </label>
+      <label class="top-select">
+        <span data-i18n="lang.label"></span>
+        <select id="langSelect"></select>
+      </label>
+      <button id="aboutBtn" class="btn ghost small icon" data-i18n-title="about.button" aria-label="About">i</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- People -->
+    <section id="view-people" class="view active">
+      <div class="toolbar">
+        <label class="btn primary">
+          <span data-i18n="people.add"></span>
+          <input id="fileInput" type="file" accept="image/*" multiple hidden />
+        </label>
+        <input id="searchInput" class="search" type="search" data-i18n-placeholder="people.search" />
+        <div class="spacer"></div>
+        <button id="openFolderBtn" class="btn ghost" data-i18n="people.openFolder"></button>
+        <button id="exportBtn" class="btn ghost" data-i18n="people.export"></button>
+        <button id="importBtn" class="btn ghost" data-i18n="people.import"></button>
+      </div>
+      <p class="hint" data-i18n-html="people.hint"></p>
+      <div id="peopleGrid" class="grid"></div>
+      <div id="peopleEmpty" class="empty" hidden>
+        <div class="empty-face" aria-hidden="true"></div>
+        <h2 data-i18n="people.empty.title"></h2>
+        <p data-i18n="people.empty.body"></p>
+      </div>
+    </section>
+
+    <!-- Study (flashcards) -->
+    <section id="view-study" class="view">
+      <div class="study-wrap">
+        <div id="studyCard" class="flashcard" tabindex="0">
+          <img id="studyImg" alt="" />
+          <div id="studyBack" class="flash-back" hidden>
+            <div class="flash-name" id="studyName"></div>
+            <div class="flash-reading" id="studyReading"></div>
+            <div class="flash-meta" id="studyMeta"></div>
+          </div>
+          <div id="studyTap" class="flash-tap" data-i18n="study.tap"></div>
+        </div>
+        <div class="study-controls">
+          <button id="studyPrev" class="btn ghost" data-i18n="study.prev"></button>
+          <span id="studyPos" class="muted"></span>
+          <button id="studyNext" class="btn ghost" data-i18n="study.next"></button>
+        </div>
+        <div class="study-controls">
+          <button id="studyShuffle" class="btn ghost" data-i18n="study.shuffle"></button>
+        </div>
+      </div>
+      <div id="studyEmpty" class="empty" hidden>
+        <h2 data-i18n="study.empty.title"></h2>
+        <p data-i18n="study.empty.body"></p>
+      </div>
+    </section>
+
+    <!-- Quiz -->
+    <section id="view-quiz" class="view">
+      <div id="quizSetup" class="panel setup">
+        <h2 data-i18n="quiz.setup"></h2>
+        <fieldset>
+          <legend data-i18n="quiz.mode"></legend>
+          <label class="radio"><input type="radio" name="mode" value="selfcheck" checked /> <span data-i18n="quiz.mode.selfcheck"></span></label>
+          <label class="radio"><input type="radio" name="mode" value="face2name" /> <span data-i18n="quiz.mode.face2name"></span></label>
+          <label class="radio"><input type="radio" name="mode" value="name2face" /> <span data-i18n="quiz.mode.name2face"></span></label>
+          <label class="radio"><input type="radio" name="mode" value="typing" /> <span data-i18n="quiz.mode.typing"></span></label>
+        </fieldset>
+        <fieldset>
+          <legend data-i18n="quiz.count"></legend>
+          <label class="radio"><input type="radio" name="count" value="all" checked /> <span data-i18n="quiz.count.all"></span> <span id="quizPoolSize" class="muted small"></span></label>
+          <label class="radio"><input type="radio" name="count" value="custom" id="countCustom" /> <input id="countInput" class="count-input" type="number" min="1" step="1" value="10" inputmode="numeric" /> <span data-i18n="quiz.count.unit"></span></label>
+        </fieldset>
+        <p class="muted small" data-i18n="quiz.weighted"></p>
+        <button id="quizStart" class="btn primary big" data-i18n="quiz.start"></button>
+        <p id="quizWarn" class="warn" hidden></p>
+      </div>
+
+      <div id="quizPlay" class="panel play" hidden>
+        <div class="quiz-head">
+          <span id="quizProgress" class="muted"></span>
+          <div class="progress"><div id="quizBar"></div></div>
+          <button id="quizQuit" class="btn ghost small" data-i18n="quiz.quit"></button>
+        </div>
+        <div id="quizPrompt" class="quiz-prompt"></div>
+        <div id="quizChoices" class="choices"></div>
+        <form id="quizTyping" class="typing" hidden autocomplete="off">
+          <input id="quizInput" type="text" data-i18n-placeholder="quiz.typing.placeholder" />
+          <button class="btn primary" type="submit" data-i18n="quiz.answer"></button>
+        </form>
+        <div id="quizSelf" class="selfcheck" hidden>
+          <button id="quizReveal" class="btn primary big"><span data-i18n="quiz.reveal"></span> <kbd>Space</kbd></button>
+          <div id="quizAnswer" class="answer" hidden>
+            <div id="quizAnswerName" class="answer-name"></div>
+            <div id="quizAnswerReading" class="answer-reading"></div>
+            <div id="quizAnswerNote" class="answer-note"></div>
+          </div>
+          <div id="quizJudge" class="judge" hidden>
+            <button id="quizMiss" class="btn judge-ng"><kbd>←</kbd> <span data-i18n="quiz.missedIt"></span></button>
+            <button id="quizGot" class="btn judge-ok"><span data-i18n="quiz.gotIt"></span> <kbd>→</kbd></button>
+          </div>
+        </div>
+        <div id="quizFeedback" class="feedback" hidden></div>
+        <button id="quizNext" class="btn primary" hidden data-i18n="quiz.next"></button>
+      </div>
+
+      <div id="quizResult" class="panel result" hidden>
+        <div class="score" id="quizScore"></div>
+        <div id="quizMissed" class="missed"></div>
+        <div class="result-actions">
+          <button id="quizRetryMissed" class="btn primary" data-i18n="quiz.retryMissed"></button>
+          <button id="quizAgain" class="btn ghost" data-i18n="quiz.backToSetup"></button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Edit dialog -->
+  <dialog id="editDialog">
+    <form id="editForm" method="dialog" class="edit">
+      <label class="edit-photo">
+        <img id="editImg" alt="" />
+        <span data-i18n="edit.changePhoto"></span>
+        <input id="editPhotoInput" type="file" accept="image/*" hidden />
+      </label>
+      <div class="edit-fields">
+        <label><span data-i18n="edit.name"></span><input id="editName" required /></label>
+        <label><span data-i18n="edit.reading"></span><input id="editReading" data-i18n-placeholder="edit.reading.placeholder" /></label>
+        <label><span data-i18n="edit.group"></span><input id="editGroup" list="groupList" data-i18n-placeholder="edit.group.placeholder" /></label>
+        <label><span data-i18n="edit.note"></span><textarea id="editNote" rows="3" data-i18n-placeholder="edit.note.placeholder"></textarea></label>
+        <div class="stats muted small" id="editStats"></div>
+        <div class="edit-actions">
+          <button type="button" id="editDelete" class="btn danger" data-i18n="edit.delete"></button>
+          <div class="spacer"></div>
+          <button type="button" id="editCancel" class="btn ghost" data-i18n="edit.cancel"></button>
+          <button type="submit" class="btn primary" data-i18n="edit.save"></button>
+        </div>
+      </div>
+    </form>
+  </dialog>
+  <datalist id="groupList"></datalist>
+
+  <!-- Confirm dialog (WKWebView on macOS does not implement window.confirm) -->
+  <dialog id="confirmDialog">
+    <form method="dialog" class="confirm">
+      <p id="confirmText"></p>
+      <div class="edit-actions">
+        <div class="spacer"></div>
+        <button value="cancel" class="btn ghost" data-i18n="confirm.cancel"></button>
+        <button value="ok" class="btn danger" data-i18n="confirm.ok"></button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- About dialog -->
+  <dialog id="aboutDialog">
+    <div class="about">
+      <div class="about-head">
+        <span class="brand-mark" aria-hidden="true">?</span>
+        <div>
+          <h2 data-i18n="about.title"></h2>
+          <div id="aboutVersion" class="muted small"></div>
+        </div>
+      </div>
+      <p data-i18n="about.body"></p>
+      <p class="muted small" data-i18n="about.privacy"></p>
+      <p class="small" data-i18n="about.license"></p>
+      <details id="aboutLicenses">
+        <summary data-i18n="about.thirdParty"></summary>
+        <iframe id="licensesFrame" title="Third-party licenses"></iframe>
+      </details>
+      <div class="edit-actions">
+        <div class="spacer"></div>
+        <button id="aboutClose" class="btn primary" data-i18n="about.close"></button>
+      </div>
+    </div>
+  </dialog>
+
+  <div id="dropOverlay" class="drop-overlay" hidden data-i18n="people.dropHere"></div>
+  <div id="toast" class="toast" hidden></div>
+
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

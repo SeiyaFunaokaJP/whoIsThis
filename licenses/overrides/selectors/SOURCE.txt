@@ -1,0 +1,9 @@
+Crate: selectors 0.36.1
+Commit: 635e1a19d02960588a00e189bd4bd5bdb150ec3d (release commit, from the crate's .cargo_vcs_info.json)
+License field on crates.io: MPL-2.0
+Fetched: 2026-09-25, re-verified byte-identical 2026-09-26
+LICENSE: https://www.mozilla.org/media/MPL/2.0/index.txt
+Note: neither the crates.io package nor the upstream repository (https://github.com/servo/stylo) at the
+release commit contains an MPL-2.0 license file (checked the whole tree). The source files carry the
+MPL-2.0 header ("If a copy of the MPL was not distributed with this file, You can obtain one at
+https://mozilla.org/MPL/2.0/"), so the canonical MPL-2.0 text from mozilla.org is used.

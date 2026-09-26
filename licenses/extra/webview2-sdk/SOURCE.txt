@@ -1,0 +1,4 @@
+Fetched 2026-09-25. LICENSE.txt extracted verbatim from
+https://www.nuget.org/api/v2/package/Microsoft.Web.WebView2/1.0.3650.58
+(the SDK version webview2-com-sys 0.38.2 is built from; its bundled WebView2LoaderStatic.lib
+files are byte-identical to build/native/<arch>/ in that package).

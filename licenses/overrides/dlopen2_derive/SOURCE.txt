@@ -1,0 +1,5 @@
+Crate: dlopen2_derive 0.4.3
+Commit: cc80e4a0a90d499b677fdf7743699b4b3a43a989 (release commit, from the crate's .cargo_vcs_info.json)
+License field on crates.io: MIT
+Fetched: 2026-09-25, re-verified byte-identical 2026-09-26
+LICENSE: https://raw.githubusercontent.com/OpenByteDev/dlopen2/cc80e4a0a90d499b677fdf7743699b4b3a43a989/LICENSE

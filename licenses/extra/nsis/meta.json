@@ -1,0 +1,7 @@
+{
+  "name": "NSIS (Nullsoft Scriptable Install System)",
+  "version": "3.11",
+  "license": "Zlib, bzip2-1.0.6, CPL-1.0 (LZMA module, with linking exception)",
+  "description": "Only the Windows setup installer (*-setup.exe) contains NSIS code (installer stub and LZMA decompressor), used unmodified. Source code: https://nsis.sourceforge.io/Download",
+  "url": "https://nsis.sourceforge.io/"
+}

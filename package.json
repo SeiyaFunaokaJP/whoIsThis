@@ -1,0 +1,21 @@
+{
+  "name": "who-is-this",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "tauri dev",
+    "build": "node scripts/build.mjs",
+    "licenses": "node scripts/licenses.mjs",
+    "licenses:check": "node scripts/licenses.mjs --check",
+    "bump": "node scripts/bump.mjs",
+    "tauri": "tauri"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2"
+  },
+  "description": "Learn to match faces and names",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
+}

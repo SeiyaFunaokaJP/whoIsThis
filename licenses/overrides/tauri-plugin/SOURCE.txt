@@ -1,0 +1,7 @@
+Crate: tauri-plugin 2.6.3
+Commit: 6f6ab1207bb3923c2721fbc67d2fdb1c8deb0c7a (release commit, from the crate's .cargo_vcs_info.json)
+License field on crates.io: Apache-2.0 OR MIT
+Fetched: 2026-09-25, re-verified byte-identical 2026-09-26
+LICENSE_MIT: https://raw.githubusercontent.com/tauri-apps/tauri/6f6ab1207bb3923c2721fbc67d2fdb1c8deb0c7a/LICENSE_MIT
+LICENSE_APACHE-2.0: https://raw.githubusercontent.com/tauri-apps/tauri/6f6ab1207bb3923c2721fbc67d2fdb1c8deb0c7a/LICENSE_APACHE-2.0
+Note: the crate lives in crates/tauri-plugin/ of the repository, which has no license files of its own; these are the repository-root files at the release commit (tag tauri-plugin-v2.6.3).

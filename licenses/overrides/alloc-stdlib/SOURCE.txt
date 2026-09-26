@@ -1,0 +1,5 @@
+Crate: alloc-stdlib 0.2.4
+Commit: ae42d22078b98549e987d2f03d12df7b984fde47 (release commit, from the crate's .cargo_vcs_info.json)
+License field on crates.io: BSD-3-Clause
+Fetched: 2026-09-25, re-verified byte-identical 2026-09-26
+LICENSE: https://raw.githubusercontent.com/dropbox/rust-alloc-no-stdlib/ae42d22078b98549e987d2f03d12df7b984fde47/LICENSE

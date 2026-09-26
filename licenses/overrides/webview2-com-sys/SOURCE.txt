@@ -1,0 +1,5 @@
+Crate: webview2-com-sys 0.38.2
+Commit: b74dc5e2b394044bea5191052868ce7a106c202c (release commit, from the crate's .cargo_vcs_info.json)
+License field on crates.io: MIT
+Fetched: 2026-09-25, re-verified byte-identical 2026-09-26
+LICENSE: https://raw.githubusercontent.com/wravery/webview2-rs/b74dc5e2b394044bea5191052868ce7a106c202c/LICENSE
